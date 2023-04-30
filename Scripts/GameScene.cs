@@ -3,10 +3,12 @@ using System;
 
 public class GameScene : Node2D
 {
+	public static GameScene Instance { get; private set; }
+	public Quad Edges { get; private set; } = new Quad(top: 72, bottom: 648, right: 928, left: 352);
 
 	public override void _Ready()
 	{
-		//
+		Instance = this;
 	}
 
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -27,5 +29,22 @@ public class GameScene : Node2D
 	public static Vector2 Abs(Vector2 value)
 	{
 		return new Vector2(Mathf.Abs(value.x), Mathf.Abs(value.y));
+	}
+
+	[Serializable]
+	public class Quad
+	{
+		public float Top { get; set; }
+		public float Bottom { get; set; }
+		public float Right { get; set; }
+		public float Left { get; set; }
+
+		public Quad(float top, float bottom, float right, float left)
+		{
+			Top = top;
+			Bottom = bottom;
+			Right = right;
+			Left = left;
+		}
 	}
 }
