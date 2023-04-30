@@ -17,6 +17,16 @@ public class GameScene : Node2D
 //      
 //  }
 
+	public bool BetweenEdge(Vector2 position)
+	{
+		// if (position.x >= Edges.Right || position.x <= Edges.Left || position.y >= Edges.Bottom || position.y <= Edges.Top)
+		// {
+		//     return false;
+		// }
+
+		return !(position.x >= Edges.Right || position.x <= Edges.Left || position.y >= Edges.Bottom || position.y <= Edges.Top);
+	}
+
 	public static Vector2 Lerp(Vector2 from, Vector2 to, float _in)
 	{
 		Vector2 destination = new Vector2(0, 0);

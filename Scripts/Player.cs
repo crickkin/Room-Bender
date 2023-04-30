@@ -47,7 +47,11 @@ public class Player : Area2D
 		if (direction == Vector2.Zero)
 			return;
 		
-		Position += direction * _moveFactor;
+		Vector2 movement = direction * _moveFactor;
+		if (!GameScene.Instance.BetweenEdge(Position + movement))
+			return;
+		
+		Position += movement;
 		bool horizontal = (direction == Vector2.Left || direction == Vector2.Right);
 
 		EmitSignal(nameof(PositionUpdate), Position, horizontal, direction);
