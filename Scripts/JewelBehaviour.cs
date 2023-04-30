@@ -4,6 +4,7 @@ using System;
 public class JewelBehaviour : Area2D
 {
 	private AnimatedSprite _animatedSprite;
+	private bool _collected = false;
 
 	public override void _Ready()
 	{
@@ -20,12 +21,14 @@ public class JewelBehaviour : Area2D
 
 	private void _on_Jewel_area_entered(object area)
 	{
+		if (_collected) return;
+		
 		Player player = area as Player;
 
 		if (player != null)
 		{
-			// GD.Print("Player collided!");
 			player.Collect();
+			_collected = true;
 			_animatedSprite.Animation = "collected";
 		}
 	}

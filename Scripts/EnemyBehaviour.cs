@@ -4,6 +4,7 @@ using System;
 public class EnemyBehaviour : Area2D
 {
 	private float _moveFactor = 96;
+	private bool _hittedPlayer = false;
 
 	private AnimatedSprite _animatedSprite;
 
@@ -47,6 +48,8 @@ public class EnemyBehaviour : Area2D
 	}
 	private void _on_Enemy_area_entered(object area)
 	{
+		if (_hittedPlayer) return;
+
         Player player = area as Player;
 
         if (player != null)
@@ -55,6 +58,7 @@ public class EnemyBehaviour : Area2D
 			{
 				DieMonsterYouDontBelongInThisWorld();
 			}
+			_hittedPlayer = true;
         }
 	}
 }
