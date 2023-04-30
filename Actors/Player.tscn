@@ -76,12 +76,15 @@ script = ExtResource( 2 )
 position = Vector2( 0, -4 )
 frames = SubResource( 3 )
 animation = "idle"
-frame = 5
+frame = 2
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0.400017, -3.2 )
 scale = Vector2( 1, 1 )
 shape = SubResource( 4 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
 
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]

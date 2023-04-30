@@ -4,6 +4,11 @@ using System;
 public class Player : Area2D
 {
 	private int _moveFactor = 96;
+	private int _life = 3;
+
+	private bool _isDead = false;
+
+	public bool IsDead => _isDead;
 
 	private enum State { Idle, Dead };
 	private State _state = State.Idle;
@@ -13,6 +18,7 @@ public class Player : Area2D
 	[Signal] public delegate void PositionUpdate(Vector2 position, bool horizontalMovement, Vector2 direction);
 	[Signal] public delegate void JewelCollected();
 	[Signal] public delegate void LifeUpdate(int life);
+	[Signal] public delegate void PlayerDied();
 
 	public override void _Ready()
 	{
@@ -21,12 +27,9 @@ public class Player : Area2D
 
 	public override void _Process(float delta)
 	{
-		HandleInputs();
+		if (_isDead) return;
 
-		if (Input.IsActionJustPressed("ui_select"))
-		{
-			ChangeState(State.Dead);
-		}
+		HandleInputs();
 	}
 
 	#region Inputs
@@ -67,7 +70,7 @@ public class Player : Area2D
 			return;
 		
 		Vector2 movement = direction * _moveFactor;
-		if (!GameScene.Instance.BetweenEdge(Position + movement))
+		if (!GameScene.Instance.BetweenEdge(Position + movement, offset: 96))
 			return;
 		
 		Position += movement;
@@ -81,14 +84,32 @@ public class Player : Area2D
 		EmitSignal(nameof(JewelCollected));
 	}
 
+	public Player TakeDamage()
+	{
+		_life--;
+		EmitSignal(nameof(LifeUpdate), _life);
+
+		if (_life <= 0)
+		{
+			Die();
+		}
+
+		return this;
+	}
+
+	private void Die()
+	{
+		_animatedSprite.Animation = "death";
+	}
+
 	private void _on_AnimatedSprite_animation_finished()
 	{
-		// Replace with function body.
 		if (_animatedSprite.Animation == "death")
 		{
 			GD.Print("R.i.p. player");
 			Visible = false;
 			_animatedSprite.Playing = false;
+			EmitSignal(nameof(PlayerDied));
 		}
 	}
 }

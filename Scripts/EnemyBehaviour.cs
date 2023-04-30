@@ -45,6 +45,16 @@ public class EnemyBehaviour : Area2D
 			QueueFree();
 		}
 	}
+	private void _on_Enemy_area_entered(object area)
+	{
+        Player player = area as Player;
+
+        if (player != null)
+        {
+			if (!player.TakeDamage().IsDead)
+			{
+				DieMonsterYouDontBelongInThisWorld();
+			}
+        }
+	}
 }
-
-

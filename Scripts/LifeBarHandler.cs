@@ -26,6 +26,9 @@ public class LifeBarHandler : Node2D
 
 	private void OnLifeUpdate(int life)
 	{
-		//
+		for (int i = 0; i < 3; i++)
+		{
+			_lifeIcons[i].Visible = i <= (life - 1);
+		}
 	}
 }

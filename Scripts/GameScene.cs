@@ -6,25 +6,35 @@ public class GameScene : Node2D
 	public static GameScene Instance { get; private set; }
 	public Quad Edges { get; private set; } = new Quad(top: 72, bottom: 648, right: 928, left: 352);
 
+	private bool _gameEnded = false;
+
 	public override void _Ready()
 	{
 		Instance = this;
+
+		var player = GetTree().CurrentScene.GetNode("Player");
+		player.Connect("PlayerDied", this, "OnPlayerDeath");
 	}
 
-//  // Called every frame. 'delta' is the elapsed time since the previous frame.
-//  public override void _Process(float delta)
-//  {
-//      
-//  }
-
-	public bool BetweenEdge(Vector2 position)
+	public override void _Process(float delta)
 	{
-		// if (position.x >= Edges.Right || position.x <= Edges.Left || position.y >= Edges.Bottom || position.y <= Edges.Top)
-		// {
-		//     return false;
-		// }
+		if (!_gameEnded) return;
 
-		return !(position.x >= Edges.Right || position.x <= Edges.Left || position.y >= Edges.Bottom || position.y <= Edges.Top);
+		if (Input.IsActionJustPressed("restart"))
+		{
+			GetTree().ReloadCurrentScene();
+		}
+	}
+
+	private void OnPlayerDeath()
+	{
+		_gameEnded = true;
+	}
+
+	public bool BetweenEdge(Vector2 position, float offset = 0)
+	{
+		return !(position.x >= (Edges.Right - offset) || position.x <= (Edges.Left + offset) || 
+			position.y >= (Edges.Bottom - offset) || position.y <= (Edges.Top + offset));
 	}
 
 	public static Vector2 Lerp(Vector2 from, Vector2 to, float _in)
