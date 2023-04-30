@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Actors/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Actors/Tile.tscn" type="PackedScene" id=2]
@@ -6,7 +6,6 @@
 [ext_resource path="res://Scripts/GameScene.cs" type="Script" id=4]
 [ext_resource path="res://Scripts/FloorBehaviour.cs" type="Script" id=5]
 [ext_resource path="res://Fonts/MorrisRomanBlack.ttf" type="DynamicFontData" id=6]
-[ext_resource path="res://Actors/Enemy.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Sprites/joia.png" type="Texture" id=8]
 [ext_resource path="res://Sprites/bg.png" type="Texture" id=9]
 [ext_resource path="res://Actors/Heart.tscn" type="PackedScene" id=10]
@@ -20,21 +19,22 @@ font_data = ExtResource( 6 )
 script = ExtResource( 4 )
 
 [node name="UI" type="Node2D" parent="."]
+z_index = 100
 
 [node name="Life bar" type="Node2D" parent="UI"]
 position = Vector2( 430, 71 )
 script = ExtResource( 11 )
 
 [node name="Heart" parent="UI/Life bar" instance=ExtResource( 10 )]
-frame = 2
+frame = 4
 
 [node name="Heart2" parent="UI/Life bar" instance=ExtResource( 10 )]
 position = Vector2( 52, 0 )
-frame = 2
+frame = 4
 
 [node name="Heart3" parent="UI/Life bar" instance=ExtResource( 10 )]
 position = Vector2( 104, 0 )
-frame = 2
+frame = 4
 
 [node name="JewelCounter" type="Label" parent="UI"]
 margin_left = 781.0
@@ -137,6 +137,3 @@ position = Vector2( 736, 552 )
 
 [node name="Tile15" parent="Floor" instance=ExtResource( 2 )]
 position = Vector2( 832, 552 )
-
-[node name="Enemy" parent="." instance=ExtResource( 7 )]
-position = Vector2( 544, 441 )

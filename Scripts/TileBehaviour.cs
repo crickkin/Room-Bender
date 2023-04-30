@@ -7,6 +7,7 @@ public class TileBehaviour : Node2D
 	private int _moveFactor = 96;
 
 	private const string JEWEL = "res://Actors/Jewel.tscn";
+	private const string ENEMY = "res://Actors/Enemy.tscn";
 
 	public override void _Ready() 
 	{
@@ -14,18 +15,28 @@ public class TileBehaviour : Node2D
 
 		if (Position != new Vector2(640, 360)) // posição inicial do player
 		{
-			Roll();
+			Roll(true);
 		}
 	}
 
-	private void Roll()
+	private void Roll(bool firstCall = false)
 	{
 		float itemSpawnChance = (float) GD.RandRange(0.0, 1.0);
 
-		if (itemSpawnChance > .75)
+		if (itemSpawnChance > .5)
 		{
-			var jewel = GD.Load<PackedScene>(JEWEL).Instance();
-			AddChild(jewel);
+			float enemySpawnChance = (float)GD.RandRange(0.0, 1.0);
+			if (!firstCall && enemySpawnChance > .7)
+			{
+				var enemy = GD.Load<PackedScene>(ENEMY).Instance() as Area2D;
+				enemy.Position = Position;
+				GetTree().CurrentScene.AddChild(enemy);
+			}
+			else if (itemSpawnChance > .75)
+			{
+				var jewel = GD.Load<PackedScene>(JEWEL).Instance();
+				AddChild(jewel);
+			}
 		}
 	}
 
