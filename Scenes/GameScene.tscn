@@ -15,3 +15,80 @@ position = Vector2( 640, 360 )
 script = ExtResource( 5 )
 
 [node name="Tile" parent="Floor" instance=ExtResource( 2 )]
+position = Vector2( 448, 360 )
+
+[node name="Tile26" parent="Floor" instance=ExtResource( 2 )]
+visible = false
+position = Vector2( 928, 168 )
+
+[node name="Tile2" parent="Floor" instance=ExtResource( 2 )]
+position = Vector2( 544, 360 )
+
+[node name="Tile3" parent="Floor" instance=ExtResource( 2 )]
+position = Vector2( 640, 360 )
+
+[node name="Tile4" parent="Floor" instance=ExtResource( 2 )]
+position = Vector2( 736, 360 )
+
+[node name="Tile5" parent="Floor" instance=ExtResource( 2 )]
+position = Vector2( 832, 360 )
+
+[node name="Tile16" parent="Floor" instance=ExtResource( 2 )]
+position = Vector2( 448, 264 )
+
+[node name="Tile17" parent="Floor" instance=ExtResource( 2 )]
+position = Vector2( 544, 264 )
+
+[node name="Tile18" parent="Floor" instance=ExtResource( 2 )]
+position = Vector2( 640, 264 )
+
+[node name="Tile19" parent="Floor" instance=ExtResource( 2 )]
+position = Vector2( 736, 264 )
+
+[node name="Tile20" parent="Floor" instance=ExtResource( 2 )]
+position = Vector2( 832, 264 )
+
+[node name="Tile21" parent="Floor" instance=ExtResource( 2 )]
+position = Vector2( 448, 168 )
+
+[node name="Tile22" parent="Floor" instance=ExtResource( 2 )]
+position = Vector2( 544, 168 )
+
+[node name="Tile23" parent="Floor" instance=ExtResource( 2 )]
+position = Vector2( 640, 168 )
+
+[node name="Tile24" parent="Floor" instance=ExtResource( 2 )]
+position = Vector2( 736, 168 )
+
+[node name="Tile25" parent="Floor" instance=ExtResource( 2 )]
+position = Vector2( 832, 168 )
+
+[node name="Tile6" parent="Floor" instance=ExtResource( 2 )]
+position = Vector2( 448, 456 )
+
+[node name="Tile7" parent="Floor" instance=ExtResource( 2 )]
+position = Vector2( 544, 456 )
+
+[node name="Tile8" parent="Floor" instance=ExtResource( 2 )]
+position = Vector2( 640, 456 )
+
+[node name="Tile9" parent="Floor" instance=ExtResource( 2 )]
+position = Vector2( 736, 456 )
+
+[node name="Tile10" parent="Floor" instance=ExtResource( 2 )]
+position = Vector2( 832, 456 )
+
+[node name="Tile11" parent="Floor" instance=ExtResource( 2 )]
+position = Vector2( 448, 552 )
+
+[node name="Tile12" parent="Floor" instance=ExtResource( 2 )]
+position = Vector2( 544, 552 )
+
+[node name="Tile13" parent="Floor" instance=ExtResource( 2 )]
+position = Vector2( 640, 552 )
+
+[node name="Tile14" parent="Floor" instance=ExtResource( 2 )]
+position = Vector2( 736, 552 )
+
+[node name="Tile15" parent="Floor" instance=ExtResource( 2 )]
+position = Vector2( 832, 552 )

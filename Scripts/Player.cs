@@ -6,11 +6,11 @@ public class Player : Area2D
 	private int _moveFactor = 96;
 
 	[Signal]
-	public delegate void Moved(Vector2 direction);
+	public delegate void PositionUpdate(Vector2 position, bool horizontalMovement, Vector2 direction);
 
 	public override void _Ready()
 	{
-		
+
 	}
 
 	public override void _Process(float delta)
@@ -48,6 +48,8 @@ public class Player : Area2D
 			return;
 		
 		Position += direction * _moveFactor;
-		EmitSignal(nameof(Moved), direction);
+		bool horizontal = (direction == Vector2.Left || direction == Vector2.Right);
+
+		EmitSignal(nameof(PositionUpdate), Position, horizontal, direction);
 	}
 }
