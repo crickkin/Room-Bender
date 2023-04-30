@@ -1,9 +1,33 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public class TileBehaviour : Node2D
 {
 	private int _moveFactor = 96;
+
+	private const string JEWEL = "res://Actors/Jewel.tscn";
+
+	public override void _Ready() 
+	{
+		GD.Randomize();
+
+		if (Position != new Vector2(640, 360)) // posição inicial do player
+		{
+			Roll();
+		}
+	}
+
+	private void Roll()
+	{
+		float itemSpawnChance = (float) GD.RandRange(0.0, 1.0);
+
+		if (itemSpawnChance > .7)
+		{
+			var jewel = GD.Load<PackedScene>(JEWEL).Instance();
+			AddChild(jewel);
+		}
+	}
 
 	public void Move(Vector2 direction)
 	{

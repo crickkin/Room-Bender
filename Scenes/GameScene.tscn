@@ -2,12 +2,22 @@
 
 [ext_resource path="res://Actors/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Actors/Tile.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Sprites/joia.png" type="Texture" id=3]
+[ext_resource path="res://Scripts/JewelCounter.cs" type="Script" id=3]
 [ext_resource path="res://Scripts/GameScene.cs" type="Script" id=4]
 [ext_resource path="res://Scripts/FloorBehaviour.cs" type="Script" id=5]
 
 [node name="GameScene" type="Node2D"]
 script = ExtResource( 4 )
+
+[node name="UI" type="Node2D" parent="."]
+
+[node name="Label" type="Label" parent="UI"]
+margin_left = 781.0
+margin_top = 72.0
+margin_right = 870.0
+margin_bottom = 117.0
+text = "0"
+script = ExtResource( 3 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 640, 360 )
@@ -17,14 +27,6 @@ script = ExtResource( 5 )
 
 [node name="Tile" parent="Floor" instance=ExtResource( 2 )]
 position = Vector2( 448, 360 )
-
-[node name="Tile26" parent="Floor" instance=ExtResource( 2 )]
-visible = false
-position = Vector2( 928, 72 )
-
-[node name="Tile27" parent="Floor" instance=ExtResource( 2 )]
-visible = false
-position = Vector2( 352, 648 )
 
 [node name="Tile2" parent="Floor" instance=ExtResource( 2 )]
 position = Vector2( 544, 360 )
@@ -46,10 +48,6 @@ position = Vector2( 544, 264 )
 
 [node name="Tile18" parent="Floor" instance=ExtResource( 2 )]
 position = Vector2( 640, 264 )
-
-[node name="Sprite2" type="Sprite" parent="Floor/Tile18"]
-scale = Vector2( 2, 2 )
-texture = ExtResource( 3 )
 
 [node name="Tile19" parent="Floor" instance=ExtResource( 2 )]
 position = Vector2( 736, 264 )
