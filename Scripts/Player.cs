@@ -3,7 +3,10 @@ using System;
 
 public class Player : Area2D
 {
-	private int _moveFactor = 50;
+	private int _moveFactor = 96;
+
+	[Signal]
+	public delegate void Moved(Vector2 direction);
 
 	public override void _Ready()
 	{
@@ -36,6 +39,15 @@ public class Player : Area2D
 			movement = Vector2.Left;
 		}
 
-		Position += movement * _moveFactor;
+		Move(movement);
+	}
+
+	private void Move(Vector2 direction)
+	{
+		if (direction == Vector2.Zero)
+			return;
+		
+		Position += direction * _moveFactor;
+		EmitSignal(nameof(Moved), direction);
 	}
 }
