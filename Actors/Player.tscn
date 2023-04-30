@@ -1,7 +1,9 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Sprites/player.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Player.cs" type="Script" id=2]
+[ext_resource path="res://Audios/dano.wav" type="AudioStream" id=3]
+[ext_resource path="res://Audios/morte.wav" type="AudioStream" id=4]
 
 [sub_resource type="AtlasTexture" id=11]
 atlas = ExtResource( 1 )
@@ -76,7 +78,7 @@ script = ExtResource( 2 )
 position = Vector2( 0, -4 )
 frames = SubResource( 3 )
 animation = "idle"
-frame = 2
+frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -87,4 +89,11 @@ shape = SubResource( 4 )
 [node name="Timer" type="Timer" parent="."]
 wait_time = 3.0
 
+[node name="DamageSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )
+
+[node name="DeathSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 4 )
+
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

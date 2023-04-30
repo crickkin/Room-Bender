@@ -6,6 +6,9 @@ public class Player : Area2D
 	private int _moveFactor = 96;
 	private int _life = 3;
 
+	private AudioStreamPlayer2D _damageSFX;
+	private AudioStreamPlayer2D _deathSFX;
+
 	private bool _isDead = false;
 
 	public bool IsDead => _isDead;
@@ -14,15 +17,21 @@ public class Player : Area2D
 	private State _state = State.Idle;
 
 	private AnimatedSprite _animatedSprite;
+	// private Timer _timer;
 
 	[Signal] public delegate void PositionUpdate(Vector2 position, bool horizontalMovement, Vector2 direction);
 	[Signal] public delegate void JewelCollected();
 	[Signal] public delegate void LifeUpdate(int life);
 	[Signal] public delegate void PlayerDied();
+	// [Signal] public delegate void UpdateTimer(int timer);
 
 	public override void _Ready()
 	{
 		_animatedSprite = GetNode<AnimatedSprite>("AnimatedSprite");
+		_damageSFX = GetNode<AudioStreamPlayer2D>("DamageSFX");
+		_deathSFX = GetNode<AudioStreamPlayer2D>("DeathSFX");
+		// _timer = GetNode<Timer>("Timer");
+		// _timer.Start();
 	}
 
 	public override void _Process(float delta)
@@ -75,6 +84,8 @@ public class Player : Area2D
 		
 		Position += movement;
 		bool horizontal = (direction == Vector2.Left || direction == Vector2.Right);
+		// _timer.Stop();
+		// _timer.Start();
 
 		EmitSignal(nameof(PositionUpdate), Position, horizontal, direction);
 	}
@@ -87,11 +98,17 @@ public class Player : Area2D
 	public Player TakeDamage()
 	{
 		_life--;
+		// _damageSFX.Play();
 		EmitSignal(nameof(LifeUpdate), _life);
 
 		if (_life <= 0)
 		{
 			Die();
+			_deathSFX.Play();
+		}
+		else
+		{
+			_damageSFX.Play();
 		}
 
 		return this;
@@ -112,6 +129,10 @@ public class Player : Area2D
 			EmitSignal(nameof(PlayerDied));
 		}
 	}
+	
+	private void _on_Timer_timeout()
+	{
+		// Die();
+	}
+
 }
-
-

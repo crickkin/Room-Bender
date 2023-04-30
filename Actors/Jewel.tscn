@@ -1,5 +1,6 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=32 format=2]
 
+[ext_resource path="res://Audios/money.wav" type="AudioStream" id=1]
 [ext_resource path="res://Scripts/JewelBehaviour.cs" type="Script" id=2]
 [ext_resource path="res://Sprites/jewel.png" type="Texture" id=3]
 
@@ -130,11 +131,14 @@ script = ExtResource( 2 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 2 )
 animation = "idle"
-frame = 2
+frame = 9
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
+
+[node name="CoinSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 1 )
 
 [connection signal="area_entered" from="." to="." method="_on_Jewel_area_entered"]
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]

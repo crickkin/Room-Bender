@@ -50,15 +50,15 @@ public class EnemyBehaviour : Area2D
 	{
 		if (_hittedPlayer) return;
 
-        Player player = area as Player;
+		Player player = area as Player;
 
-        if (player != null)
-        {
+		if (player != null)
+		{
 			if (!player.TakeDamage().IsDead)
 			{
 				DieMonsterYouDontBelongInThisWorld();
 			}
 			_hittedPlayer = true;
-        }
+		}
 	}
 }

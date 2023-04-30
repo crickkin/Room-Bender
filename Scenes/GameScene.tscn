@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Actors/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Actors/Tile.tscn" type="PackedScene" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://Sprites/bg.png" type="Texture" id=9]
 [ext_resource path="res://Actors/Heart.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scripts/LifeBarHandler.cs" type="Script" id=11]
+[ext_resource path="res://Audios/game_over.wav" type="AudioStream" id=12]
 
 [sub_resource type="DynamicFont" id=1]
 size = 60
@@ -114,6 +115,9 @@ position = Vector2( 152, -22 )
 scale = Vector2( 3, 3 )
 z_index = 1
 texture = ExtResource( 8 )
+
+[node name="GameOverSFX" type="AudioStreamPlayer2D" parent="UI"]
+stream = ExtResource( 12 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 640, 360 )
