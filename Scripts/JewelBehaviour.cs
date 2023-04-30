@@ -10,11 +10,13 @@ public class JewelBehaviour : Area2D
 		_animatedSprite = GetNode<AnimatedSprite>("AnimatedSprite");
 	}
 
-//  // Called every frame. 'delta' is the elapsed time since the previous frame.
-//  public override void _Process(float delta)
-//  {
-//      
-//  }
+	public override void _Process(float delta)
+	{
+		if (!GameScene.Instance.BetweenEdge(GlobalPosition))
+		{
+			QueueFree();
+		}
+	}
 
 	private void _on_Jewel_area_entered(object area)
 	{

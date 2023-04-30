@@ -10,11 +10,9 @@ public class Player : Area2D
 
 	private AnimatedSprite _animatedSprite;
 
-	[Signal]
-	public delegate void PositionUpdate(Vector2 position, bool horizontalMovement, Vector2 direction);
-
-	[Signal]
-	public delegate void JewelCollected();
+	[Signal] public delegate void PositionUpdate(Vector2 position, bool horizontalMovement, Vector2 direction);
+	[Signal] public delegate void JewelCollected();
+	[Signal] public delegate void LifeUpdate(int life);
 
 	public override void _Ready()
 	{

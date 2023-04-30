@@ -1,11 +1,11 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Scripts/TileBehaviour.cs" type="Script" id=1]
-[ext_resource path="res://Sprites/floor.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/chao.png" type="Texture" id=2]
 
 [node name="Tile" type="Node2D"]
 position = Vector2( 640, 376 )
-scale = Vector2( 3, 3 )
+scale = Vector2( 4, 4 )
 z_index = -10
 script = ExtResource( 1 )
 

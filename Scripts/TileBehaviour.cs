@@ -22,7 +22,7 @@ public class TileBehaviour : Node2D
 	{
 		float itemSpawnChance = (float) GD.RandRange(0.0, 1.0);
 
-		if (itemSpawnChance > .7)
+		if (itemSpawnChance > .75)
 		{
 			var jewel = GD.Load<PackedScene>(JEWEL).Instance();
 			AddChild(jewel);
@@ -39,6 +39,9 @@ public class TileBehaviour : Node2D
 	{
 		Vector2 correctedPosition = Position;
 
+		if (GameScene.Instance.BetweenEdge(Position))
+			return;
+
 		if (correctedPosition.x >= GameScene.Instance.Edges.Right)
 		{
 			correctedPosition.x = GameScene.Instance.Edges.Left + _moveFactor;
@@ -47,7 +50,6 @@ public class TileBehaviour : Node2D
 		{
 			correctedPosition.x = GameScene.Instance.Edges.Right - _moveFactor;
 		}
-
 		if (correctedPosition.y >= GameScene.Instance.Edges.Bottom)
 		{
 			correctedPosition.y = 72 + _moveFactor;
@@ -58,5 +60,6 @@ public class TileBehaviour : Node2D
 		}
 
 		Position = correctedPosition;
+		Roll();
 	}
 }
