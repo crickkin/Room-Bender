@@ -1,21 +1,27 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public class FloorBehaviour : Node2D
 {
-    // Declare member variables here. Examples:
-    // private int a = 2;
-    // private string b = "text";
+	private List<TileBehaviour> _tiles = new List<TileBehaviour>();
 
-    // Called when the node enters the scene tree for the first time.
-    public override void _Ready()
-    {
-        
-    }
+	public override void _Ready()
+	{
+		foreach (var item in GetChildren())
+		{
+			var tile = item as TileBehaviour;
 
-//  // Called every frame. 'delta' is the elapsed time since the previous frame.
-//  public override void _Process(float delta)
-//  {
-//      
-//  }
+			if (tile != null)
+			{
+				_tiles.Add(tile);
+			}
+		}
+
+		if (_tiles.Count > 0)
+		{
+			_tiles[0].ActivateTileMovement(false);
+		}
+
+	}
 }

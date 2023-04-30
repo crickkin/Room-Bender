@@ -3,7 +3,9 @@ using System;
 
 public class TileBehaviour : Node2D
 {
-	private int _moveFactor = 64;
+	private int _moveFactor = 96;
+
+	private bool _isActive = true;
 
 	public override void _Ready()
 	{
@@ -18,8 +20,21 @@ public class TileBehaviour : Node2D
 //      
 //  }
 
+	public void ActivateTileMovement(bool shouldActivate)
+	{
+		_isActive = shouldActivate;
+	}
+
 	private void PlayerHasMoved(Vector2 direction)
 	{
+		if (!_isActive)
+			return;
+		
 		Position += direction * -1 * _moveFactor;
+	}
+
+	public static explicit operator TileBehaviour(Reference v)
+	{
+		throw new NotImplementedException();
 	}
 }
