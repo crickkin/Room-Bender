@@ -43,15 +43,15 @@ position = Vector2( 430, 71 )
 script = ExtResource( 11 )
 
 [node name="Heart" parent="UI/Life bar" instance=ExtResource( 10 )]
-frame = 5
+frame = 4
 
 [node name="Heart2" parent="UI/Life bar" instance=ExtResource( 10 )]
 position = Vector2( 52, 0 )
-frame = 5
+frame = 4
 
 [node name="Heart3" parent="UI/Life bar" instance=ExtResource( 10 )]
 position = Vector2( 104, 0 )
-frame = 5
+frame = 4
 
 [node name="JewelCounter" type="Label" parent="UI"]
 margin_left = 781.0

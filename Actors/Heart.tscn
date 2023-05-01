@@ -49,5 +49,5 @@ animations = [ {
 [node name="Heart" type="AnimatedSprite"]
 scale = Vector2( 4, 4 )
 frames = SubResource( 11 )
-frame = 1
+frame = 6
 playing = true
