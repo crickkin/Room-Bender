@@ -17,26 +17,32 @@ public class Player : Area2D
 	private State _state = State.Idle;
 
 	private AnimatedSprite _animatedSprite;
+
+	private readonly int _ticksToDestroy = 3;
+	private int _ticks;
 	// private Timer _timer;
 
 	[Signal] public delegate void PositionUpdate(Vector2 position, bool horizontalMovement, Vector2 direction);
 	[Signal] public delegate void JewelCollected();
 	[Signal] public delegate void LifeUpdate(int life);
 	[Signal] public delegate void PlayerDied();
-	// [Signal] public delegate void UpdateTimer(int timer);
+	[Signal] public delegate void UpdateTimer(int timer);
 
 	public override void _Ready()
 	{
 		_animatedSprite = GetNode<AnimatedSprite>("AnimatedSprite");
 		_damageSFX = GetNode<AudioStreamPlayer2D>("DamageSFX");
 		_deathSFX = GetNode<AudioStreamPlayer2D>("DeathSFX");
+
+		_ticks = _ticksToDestroy;
 		// _timer = GetNode<Timer>("Timer");
 		// _timer.Start();
 	}
 
 	public override void _Process(float delta)
 	{
-		if (_isDead) return;
+		if (_isDead || !GameScene.Instance.TutorialCompleted) 
+			return;
 
 		HandleInputs();
 	}
@@ -79,6 +85,8 @@ public class Player : Area2D
 			return;
 		
 		Vector2 movement = direction * _moveFactor;
+		_ticks = _ticksToDestroy;
+		EmitSignal(nameof(UpdateTimer), _ticks);
 		if (!GameScene.Instance.BetweenEdge(Position + movement, offset: 96))
 			return;
 		
@@ -98,7 +106,6 @@ public class Player : Area2D
 	public Player TakeDamage()
 	{
 		_life--;
-		// _damageSFX.Play();
 		EmitSignal(nameof(LifeUpdate), _life);
 
 		if (_life <= 0)
@@ -127,6 +134,15 @@ public class Player : Area2D
 			Visible = false;
 			_animatedSprite.Playing = false;
 			EmitSignal(nameof(PlayerDied));
+		}
+		else if (!_isDead && GameScene.Instance.TutorialCompleted)
+		{
+			_ticks--;
+			EmitSignal(nameof(UpdateTimer), _ticks);
+			if (_ticks <= 0)
+			{
+				Die();
+			}
 		}
 	}
 	

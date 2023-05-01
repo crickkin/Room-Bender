@@ -8,9 +8,22 @@ public class GameScene : Node2D
 
 	private bool _gameEnded = false;
 
+	private static bool tutorial = false;
+
+	public bool TutorialCompleted => tutorial;
+
+	[Signal] public delegate void ShowTutorial(bool show);
+
 	public override void _Ready()
 	{
 		Instance = this;
+
+		if (!tutorial)
+		{
+			GD.Print("Não fez o tutorial");
+			EmitSignal(nameof(ShowTutorial), true);
+			// tutorial = true;
+		}
 
 		var player = GetTree().CurrentScene.GetNode("Player");
 		player.Connect("PlayerDied", this, "OnPlayerDeath");
@@ -18,11 +31,25 @@ public class GameScene : Node2D
 
 	public override void _Process(float delta)
 	{
+		HandleTutorial();
+
 		if (!_gameEnded) return;
 
 		if (Input.IsActionJustPressed("restart"))
 		{
 			GetTree().ReloadCurrentScene();
+		}
+	}
+
+	private void HandleTutorial()
+	{
+		if (!tutorial)
+		{
+			if (Input.IsActionJustPressed("ui_accept"))
+			{
+				tutorial = true;
+				EmitSignal(nameof(ShowTutorial), false);
+			}
 		}
 	}
 
