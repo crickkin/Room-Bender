@@ -6,8 +6,8 @@ public class GameScene : Node2D
 	public static GameScene Instance { get; private set; }
 	public Quad Edges { get; private set; } = new Quad(top: 72, bottom: 648, right: 928, left: 352);
 
+	private AudioStreamPlayer2D _bgm;
 	private bool _gameEnded = false;
-
 	private static bool tutorial = false;
 
 	public bool TutorialCompleted => tutorial;
@@ -17,6 +17,8 @@ public class GameScene : Node2D
 	public override void _Ready()
 	{
 		Instance = this;
+
+		_bgm = GetNode<AudioStreamPlayer2D>("BGM");
 
 		if (!tutorial)
 		{
@@ -32,6 +34,10 @@ public class GameScene : Node2D
 	public override void _Process(float delta)
 	{
 		HandleTutorial();
+		if (!_bgm.Playing)
+		{
+			_bgm.Play();
+		}
 
 		if (!_gameEnded) return;
 
