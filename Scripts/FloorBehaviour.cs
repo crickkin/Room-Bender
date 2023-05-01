@@ -9,13 +9,18 @@ public class FloorBehaviour : Node2D
 
 	public override void _Ready()
 	{
+		//var mat1 = GD.Load<Material>("res://Scripts/Tile.tres");
+		//var mat2 = GD.Load<Material>("res://Scripts/Tile.tres");
+		
+		//int i = 0;
 		foreach (var item in GetChildren())
 		{
 
-			var tile = item as TileBehaviour;
-
+			var tile = item as TileBehaviour;			
 			if (tile != null)
-			{
+			{			
+				// if( i % 2 == 0) tile.Material = mat1;
+				// else  tile.Material = mat2;
 				_tiles.Add(tile);
 			}
 		}

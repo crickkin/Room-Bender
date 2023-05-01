@@ -1,0 +1,26 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+uniform vec4 outcolor : hint_color;
+uniform vec4 gridcolor : hint_color;
+void fragment(){
+	vec4 col = texture(TEXTURE, UV);
+	vec2 screensize = (vec2(1.)/SCREEN_PIXEL_SIZE.xy);
+	vec2 screen = SCREEN_UV * screensize;
+	vec2 tilesize = (vec2(1.)/TEXTURE_PIXEL_SIZE.xy);
+	vec2 tile = UV * tilesize;	
+	col.rgba *=  
+	(screen.x < (screensize.x*.5 - tilesize.x * 1.5 * 4.)||
+	screen.x > (screensize.x*.5 + tilesize.x * 1.5 * 4.)||
+	screen.y < (screensize.y*.5 - tilesize.y * 1.5 * 4.)||
+	screen.y > (screensize.y*.5 + tilesize.y * 1.5 * 4.))
+	? outcolor :vec4(1.);
+	col.rgba *= gridcolor;
+	COLOR = col;
+}"
+
+[resource]
+shader = SubResource( 1 )
+shader_param/outcolor = Color( 0.270588, 0.262745, 0.435294, 1 )
+shader_param/gridcolor = Color( 0.439216, 0.25098, 0.25098, 1 )
